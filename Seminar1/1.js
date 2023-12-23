@@ -17,25 +17,26 @@
 */
 
 const musicCollection = {
+  name: 'Музыкальная коллекция',
   albums: [
     {
-      title: "Название альбома",
-      artist: "Исполнитель",
-      year: "Год выпуска"
+      title: "I Got Love (Single)",
+      artist: "Miyagi & Эндшпиль",
+      year: "2016"
     },
     {
-      title: "Название альбома",
-      artist: "Исполнитель",
-      year: "Год выпуска"
+      title: "Silver Side Up",
+      artist: "Nickelback",
+      year: "2001"
     },
     {
-      title: "Название альбома",
-      artist: "Исполнитель",
-      year: "Год выпуска"
-    },
-    {
-      title: "Название альбома",
-      artist: "Исполнитель",
-      year: "Год выпуска"
-    }]
+      title: "Mercury — Act 2",
+      artist: "Imagine Dragons",
+      year: "2022"
+    }],
+  *[Symbol.iterator]() {
+    for (const album of this.albums) yield `${album.title} - ${album.artist} (${album.year})`;
+  }
 };
+
+for (const album of musicCollection) console.log(album);
