@@ -4,13 +4,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Отзывы</title>
   <script src="1.js" defer></script>
-  <!-- <script src="2.js" defer></script> -->
+  <script src="2.js" defer></script>
 </head>
 
 <body>
-
+  <h1>Отзывы</h1>
+  <div class="items">
+    <div class="item" id="iphone">
+      <div class="item__info">
+        <img class="item__img" src="https://uralcases.ru/wp-content/uploads/2021/09/iphone-13-midnight-select-2021.png"
+          alt="Товар">
+        <input class="item__input">
+        <button class="item__button">Отправить отзыв</button>
+      </div>
+      <div class="item__reviews"></div>
+    </div>
+    <div class="item" id="galaxy">
+      <div class="item__info">
+        <img class="item__img"
+          src="https://images.samsung.com/is/image/samsung/p6pim/ru/2108/gallery/ru-galaxy-z-fold3-f926-5g-sm-f926bzkdser-477306525?$650_519_PNG$"
+          alt="Товар">
+        <input class="item__input">
+        <button class="item__button">Отправить отзыв</button>
+      </div>
+      <div class="item__reviews"></div>
+    </div>
+    <div class="item" id="playstation">
+      <div class="item__info">
+        <img class="item__img"
+          src="https://s3.eu-west-2.amazonaws.com/prod-media.mystore/catalog/product/1/4/14%20Mar%20989.png"
+          alt="Товар">
+        <input class="item__input">
+        <button class="item__button">Отправить отзыв</button>
+      </div>
+      <div class="item__reviews"></div>
+    </div>
+  </div>
 </body>
 
 </html>
+
+<style>
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .items {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .item__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 400px;
+  }
+
+  .item__img {
+    display: block;
+    width: 300px;
+  }
+
+  .item__input {
+    padding: 8px;
+    border-radius: 8px;
+  }
+</style>

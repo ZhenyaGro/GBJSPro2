@@ -57,3 +57,68 @@ const initialData = [
     ],
   },
 ];
+
+const reviewsMap = new Map();
+initialData.forEach(item => reviewsMap.set(item.product, item.reviews));
+
+const iphoneEl = document.querySelector('#iphone');
+const galaxyEl = document.querySelector('#galaxy');
+const playstationEl = document.querySelector('#playstation');
+
+// Создание объекта для удобства
+const itemsElements = [
+  {
+    name: 'iphone',
+    product: 'Apple iPhone 13',
+    reviewsEl: iphoneEl.querySelector('#iphone .item__reviews'),
+    buttonEl: iphoneEl.querySelector('#iphone button'),
+    inputEl: iphoneEl.querySelector('#iphone .item__input')
+  },
+  {
+    name: 'galaxy',
+    product: 'Samsung Galaxy Z Fold 3',
+    reviewsEl: galaxyEl.querySelector('#galaxy .item__reviews'),
+    buttonEl: galaxyEl.querySelector('#galaxy button'),
+    inputEl: galaxyEl.querySelector('#galaxy .item__input')
+  },
+  {
+    name: 'playstation',
+    product: 'Sony PlayStation 5',
+    reviewsEl: playstationEl.querySelector('#playstation .item__reviews'),
+    buttonEl: playstationEl.querySelector('#playstation button'),
+    inputEl: playstationEl.querySelector('#playstation .item__input')
+  }];
+
+initialFill();
+
+itemsElements.forEach(item => item.buttonEl.addEventListener('click', () => {
+  const value = item.inputEl.value;
+  if (checkInputValue(value)) {
+    reviewsMap.get(item.product).push({ id: Date.now(), text: value })
+    item.reviewsEl.innerHTML += `<div>${value}</div>`;
+    item.inputEl.value = '';
+  }
+  else alert('Отзыв должен быть не менее 50 и не более 500 символов');
+}));
+
+/**
+ * Функция начального заполнения отзывов из initialData
+ */
+function initialFill() {
+  initialData.forEach(item => {
+    for (let shopItem of itemsElements) {
+      if (item.product.toLocaleLowerCase().includes(shopItem.name)) {
+        item.reviews.forEach(review => shopItem.reviewsEl.innerHTML += `<div>${review.text}</div>`);
+      }
+    }
+  });
+}
+
+/**
+ * Функция проверки корректности длины введенного отзыва
+ * @param {string} value 
+ * @returns boolean | undefined
+ */
+function checkInputValue(value) {
+  if (value.length > 4 && value.length < 501) return true;
+}
