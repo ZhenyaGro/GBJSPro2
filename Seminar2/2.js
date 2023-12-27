@@ -120,5 +120,5 @@ function initialFill() {
  * @returns boolean | undefined
  */
 function checkInputValue(value) {
-  if (value.length > 4 && value.length < 501) return true;
+  if (value.length > 49 && value.length < 501) return true;
 }
