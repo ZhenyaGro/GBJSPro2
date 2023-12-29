@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  height: 100%;
+}
+
+.page__links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.review__input,
+.review__textarea,
+.review__button-add {
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.review__button-add:hover {
+  background-color: antiquewhite;
+}
