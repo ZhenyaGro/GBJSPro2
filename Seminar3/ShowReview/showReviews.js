@@ -29,9 +29,14 @@ reviews.forEach(async (review, index) => {
     }
   });
 
-  document.querySelector(`#button-show_${index}`).addEventListener('click', () => toggleReviewsVisibility(reviewsBlockEl));
+  const showButtonEl = document.querySelector(`#button-show_${index}`);
+  showButtonEl.addEventListener('click', () => {
+    toggleReviewsVisibility(reviewsBlockEl, showButtonEl);
+  });
 });
 
-function toggleReviewsVisibility(reviewsBlock) {
-  reviewsBlock.classList.toggle('product__revievs_hide');
+async function toggleReviewsVisibility(reviewsBlock, buttonEl) {
+  buttonEl.innerHTML = await new Promise(resolve => {
+    resolve(reviewsBlock.classList.toggle('product__revievs_hide') ? 'Показать отзывы' : 'Скрыть отзывы');
+  });
 }
