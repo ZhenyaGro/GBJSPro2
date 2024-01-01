@@ -34,3 +34,24 @@ body {
 .review__button-add:hover {
   background-color: antiquewhite;
 }
+
+.product-box {
+  background-color: beige;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.product {
+  display: flex;
+  gap: 16px;
+}
+
+.product__name {
+  font-weight: 600;
+}
+
+/* .product__reviews {} */
+
+.product__revievs_hide {
+  display: none;
+}
