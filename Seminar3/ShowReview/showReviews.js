@@ -1,14 +1,18 @@
 const reviews = JSON.parse(localStorage.getItem('reviews'));
 const formEl = document.querySelector('.form');
 
-reviews.forEach(async review => {
+for (let product in reviews) {
+  createProductBlock(product);
+}
+
+async function createProductBlock(product) {
   const productId = await new Promise(resolve => {
-    const productId = review.product.replaceAll(' ', '-');
+    const productId = product.replaceAll(' ', '-');
     formEl.innerHTML += `
-    <div class="product-box">
+    <div id="product_${productId}" class="product-box">
       <div class="product">
         <div class="product__name">
-        ${review.product}
+        ${product}
         </div>
         <button id="button-show_${productId}" class="product__review-button">Показать отзывы</button>
       </div>
@@ -23,7 +27,11 @@ reviews.forEach(async review => {
   const reviewsBlockEl = await new Promise((resolve, reject) => {
     try {
       const reviewsBlockEl = document.querySelector(`#reviews_${productId}`);
-      reviewsBlockEl.innerHTML += review.review.map(review => `<div id="review_${review.id}">${review.text} <button id="button-remove_${review.id}" onClick="removeReview('${review.id}', ${review.product})">Удалить отзыв</button></div>`).join('');
+
+      for (let id in reviews[product]) {
+        reviewsBlockEl.innerHTML += `<div id="review_${id}">${reviews[product][id]} <button id="button-remove_${id}" onClick="removeReview('${id}', '${product}')">Удалить отзыв</button></div>`;
+      }
+      // reviewsBlockEl.innerHTML += reviews[product].map(review => `<div id="review_${review.id}">${review.text} <button id="button-remove_${review.id}" onClick="removeReview('${review.id}', '${product}')">Удалить отзыв</button></div>`).join('');
       resolve(reviewsBlockEl);
     } catch (error) {
       reject(error);
@@ -34,7 +42,7 @@ reviews.forEach(async review => {
   showButtonEl.addEventListener('click', () => {
     toggleReviewsVisibility(reviewsBlockEl, showButtonEl);
   });
-});
+}
 
 async function toggleReviewsVisibility(reviewsBlock, buttonEl) {
   buttonEl.innerHTML = await new Promise(resolve => {
@@ -42,8 +50,23 @@ async function toggleReviewsVisibility(reviewsBlock, buttonEl) {
   });
 }
 
-function removeReview(reviewId, productName) {
+function removeReview(id, product) {
   const reviews = JSON.parse(localStorage.getItem('reviews'));
-  console.log(reviews);
-  document.querySelector(`#review_${reviewId}`).remove();
+  delete reviews[product][id];
+
+  if (!Object.keys(reviews[product]).length) {
+    delete reviews[product];
+    removeNodes(`product_${product.replaceAll(' ', '-')}`);
+  } else document.querySelector(`#review_${id}`).remove();
+
+  localStorage.setItem('reviews', JSON.stringify(reviews));
+}
+
+
+function removeNodes(id) {
+  const element = document.getElementById(id);
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+  element.remove();
 }

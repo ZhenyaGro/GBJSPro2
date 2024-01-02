@@ -10,10 +10,9 @@ buttonAddEl.addEventListener('click', () => {
   if (!inputEl.value || !textareaEl.value) return alert('Должны быть заполнены оба поля для добавления отзыва');
 
   const productName = inputEl.value.trim();
-  // const reviewText = textareaEl.value.trim();
-  const review = { id: Date.now(), text: textareaEl.value.trim() };
+  const review = textareaEl.value.trim();
 
-  saveReviewToLocalStorage(productName, review /*reviewText*/);
+  saveReviewToLocalStorage(productName, review);
 
   inputEl.value = '';
   textareaEl.value = '';
@@ -24,12 +23,12 @@ buttonAddEl.addEventListener('click', () => {
 
 
 function saveReviewToLocalStorage(product, review) {
-  let products = JSON.parse(localStorage.getItem('reviews')) || [];
+  let products = JSON.parse(localStorage.getItem('reviews')) || {};
 
-  const existingProduct = products.find(item => item.product == product);
-  if (existingProduct) existingProduct.review.push(review);
-  else
-    products.push({ product: product, review: [review] });
+  if (!products.hasOwnProperty(product))
+    products[product] = {};
+
+  products[product][Date.now()] = review;
 
   localStorage.setItem('reviews', JSON.stringify(products));
 }

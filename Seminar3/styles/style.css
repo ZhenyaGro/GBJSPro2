@@ -43,7 +43,12 @@ body {
 
 .product {
   display: flex;
+  justify-content: center;
   gap: 16px;
+  padding: 8px;
+  border: 1px solid goldenrod;
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
 .product__name {
