@@ -26,12 +26,14 @@ body {
 
 .review__input,
 .review__textarea,
-.review__button-add {
+.review__button-add,
+.review__button-fast-fill {
   padding: 10px 15px;
   border-radius: 8px;
 }
 
-.review__button-add:hover {
+.review__button-add:hover,
+.review__button-fast-fill:hover {
   background-color: antiquewhite;
 }
 
