@@ -10,9 +10,10 @@ buttonAddEl.addEventListener('click', () => {
   if (!inputEl.value || !textareaEl.value) return alert('Должны быть заполнены оба поля для добавления отзыва');
 
   const productName = inputEl.value.trim();
-  const reviewText = textareaEl.value.trim();
+  // const reviewText = textareaEl.value.trim();
+  const review = { id: Date.now(), text: textareaEl.value.trim() };
 
-  saveReviewToLocalStorage(productName, reviewText);
+  saveReviewToLocalStorage(productName, review /*reviewText*/);
 
   inputEl.value = '';
   textareaEl.value = '';
